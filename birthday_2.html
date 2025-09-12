@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy 15th Birthday Fidelllelee!</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap");
+
+      :root {
+        --primary-color: #ba4ecd;
+        --secondary-color: #7b1fa2;
+        --accent-color: #e1bee7;
+        --dark-color: #4a148c;
+        --light-color: #f3e5f5;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        height: 100%;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        font-family: "Poppins", sans-serif;
+        color: var(--dark-color);
+        position: relative;
+      }
+
+      canvas#fireworks {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 150px;
+        height: 150px;
+        background: url("https://i.imgur.com/3Xq6Q0M.png") no-repeat
+          center/contain;
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .header {
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        font-family: "Pacifico", cursive;
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header p {
+        font-size: 1.25rem;
+        color: var(--dark-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .birthday-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .birthday-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Foto cake standar */
+      .cake-img {
+        width: 300px;
+        height: auto;
+        border-radius: 10px;
+        margin: 0 auto 1.5rem;
+        display: block;
+      }
+
+      .matcha-container {
+        margin: 1rem 0;
+      }
+
+      .matcha-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid var(--accent-color);
+        transition: all 0.3s ease;
+      }
+
+      .matcha-img:hover {
+        transform: scale(1.1);
+      }
+
+      .message {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+      }
+
+      .btn {
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-top: 1rem;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+      }
+
+      .btn:hover {
+        background: var(--secondary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 7px 20px rgba(78, 205, 196, 0.4);
+      }
+
+      .hidden-message {
+        display: none;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: rgba(255, 230, 109, 0.2);
+        border-radius: 15px;
+        border-left: 4px solid var(--accent-color);
+        animation: fadeIn 1s ease-out;
+      }
+
+      .signature {
+        margin-top: 2rem;
+        font-family: "Pacifico", cursive;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+      }
+
+      footer {
+        margin-top: 2rem;
+        font-size: 0.8rem;
+        color: var(--dark-color);
+        opacity: 0.7;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 1rem;
+        }
+        .header h1 {
+          font-size: 1.8rem;
+        }
+        .birthday-card {
+          padding: 1rem;
+        }
+        .matcha-img {
+          width: 80px;
+          height: 80px;
+        }
+        .cake-img {
+          width: 200px;
+        }
+      }
+
+      /* Tombol musik */
+      .music-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: white;
+        font-size: 1.5rem;
+        border: none;
+        border-radius: 50%;
+        width: 55px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+
+      .music-btn:hover {
+        background: var(--secondary-color);
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="fireworks"></canvas>
+
+    <div class="container">
+      <div class="header">
+        <h1>Happy 15th Birthday Fidelllelee!</h1>
+        <p>
+          To Fidelia Violeta Eleanora Yvone Achazia, wishing you an amazing
+          Sweet Fifteen!
+        </p>
+      </div>
+
+      <div class="birthday-card">
+        <!-- Foto cake standar -->
+        <img
+          src="https://partytoyz.com/cdn/shop/articles/discover-the-top-10-facts-about-kuromi.jpg?v=1745191553&width=1100"
+          alt="Birthday Cake"
+          class="cake-img"
+        />
+
+        <div class="matcha-container">
+          <img
+            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/abf82a6d-e27d-43c9-a04d-cf887a04c9f5.png"
+            alt="Green matcha latte with heart design"
+            class="matcha-img"
+          />
+        </div>
+
+        <div class="message">
+          <p>
+            Happy Sweet Fifteen! As you turn 15 on September 27th 2025, may this
+            year bring magical moments and matcha-filled happiness!
+          </p>
+          <p>Kuromi and I wish you a day as special and unique as you are!</p>
+        </div>
+
+        <button class="btn" id="showMore">Click for more wishes</button>
+
+        <div class="hidden-message" id="hiddenMessage">
+          <p>
+            Here's to another year of wonderful memories, great achievements,
+            and beautiful moments.
+          </p>
+          <p>May all your dreams and wishes come true!</p>
+        </div>
+      </div>
+
+      <div class="signature">With love and best wishes</div>
+    </div>
+    <center>
+      <footer>Made with ❤ for your special day</footer>
+    </center>
+
+    <!-- 🎵 Lagu ulang tahun -->
+    <audio id="birthdaySong" loop>
+      <source
+        src="https://atmarizz.github.io/birthday_song.github.io/"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <!-- 💥 Efek suara kembang api -->
+    <audio id="fireworkSound">
+      <source
+        src="https://www.soundjay.com/explosion/sounds/fireworks-1.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <!-- Tombol musik -->
+    <button class="music-btn" id="toggleSong">🎵</button>
+
+    <script>
+      const canvas = document.getElementById("fireworks");
+      const ctx = canvas.getContext("2d");
+      let cw, ch;
+
+      function resize() {
+        cw = window.innerWidth;
+        ch = window.innerHeight;
+        canvas.width = cw;
+        canvas.height = ch;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      class Particle {
+        constructor(x, y, color) {
+          this.x = x;
+          this.y = y;
+          this.color = color;
+          this.radius = Math.random() * 2 + 1;
+          this.speed = Math.random() * 5 + 2;
+          this.angle = Math.random() * 2 * Math.PI;
+          this.friction = 0.95;
+          this.gravity = 0.05;
+          this.alpha = 1;
+          this.decay = Math.random() * 0.015 + 0.003;
+          this.vx = Math.cos(this.angle) * this.speed;
+          this.vy = Math.sin(this.angle) * this.speed;
+        }
+        update() {
+          this.vx *= this.friction;
+          this.vy *= this.friction;
+          this.vy += this.gravity;
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.alpha > 0 ? this.alpha : 0;
+          ctx.beginPath();
+          ctx.fillStyle = this.color;
+          ctx.shadowColor = this.color;
+          ctx.shadowBlur = 8;
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      class Firework {
+        constructor() {
+          this.x = Math.random() * cw * 0.8 + cw * 0.1;
+          this.y = ch + 10;
+          this.targetY = Math.random() * ch * 0.5 + ch * 0.1;
+          this.speed = Math.random() * 3 + 4;
+          this.particles = [];
+          this.exploded = false;
+          this.color = Math.random() < 0.5 ? "#7b1fa2" : "#4caf50";
+        }
+        update() {
+          if (!this.exploded) {
+            this.y -= this.speed;
+            if (this.y <= this.targetY) {
+              this.exploded = true;
+              this.createParticles();
+
+              // 🔊 Mainkan suara kembang api saat meledak
+              const fireworkSound =
+                document.getElementById("fireworkSound");
+              fireworkSound.currentTime = 0;
+              fireworkSound.volume = 0.3;
+              fireworkSound.play();
+            }
+          } else {
+            this.particles.forEach((p, i) => {
+              p.update();
+              if (p.alpha <= 0) {
+                this.particles.splice(i, 1);
+              }
+            });
+          }
+        }
+        createParticles() {
+          const count = 30 + Math.floor(Math.random() * 30);
+          for (let i = 0; i < count; i++) {
+            this.particles.push(new Particle(this.x, this.y, this.color));
+          }
+        }
+        draw() {
+          if (!this.exploded) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.fillStyle = this.color;
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 10;
+            ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          } else {
+            this.particles.forEach((p) => p.draw());
+          }
+        }
+        isDone() {
+          return this.exploded && this.particles.length === 0;
+        }
+      }
+
+      let fireworks = [];
+      let lastTime = 0;
+      let interval = 800;
+
+      function animate(time = 0) {
+        requestAnimationFrame(animate);
+        const delta = time - lastTime;
+        if (delta > interval) {
+          fireworks.push(new Firework());
+          lastTime = time;
+        }
+        ctx.clearRect(0, 0, cw, ch);
+        fireworks.forEach((fw, i) => {
+          fw.update();
+          fw.draw();
+          if (fw.isDone()) {
+            fireworks.splice(i, 1);
+          }
+        });
+      }
+
+      animate();
+
+      document
+        .getElementById("showMore")
+        .addEventListener("click", function () {
+          const message = document.getElementById("hiddenMessage");
+          if (message.style.display === "block") {
+            message.style.display = "none";
+            this.textContent = "Click for more wishes";
+          } else {
+            message.style.display = "block";
+            this.textContent = "Hide message";
+          }
+        });
+
+      // 🎵 Tombol musik play/pause
+      const birthdaySong = document.getElementById("birthdaySong");
+      const toggleSongBtn = document.getElementById("toggleSong");
+      let isPlaying = false;
+
+      toggleSongBtn.addEventListener("click", function () {
+        if (isPlaying) {
+          birthdaySong.pause();
+          toggleSongBtn.textContent = "🎵";
+        } else {
+          birthdaySong.play();
+          toggleSongBtn.textContent = "⏸️";
+        }
+        isPlaying = !isPlaying;
+      });
+    </script>
+  </body>
+</html>
