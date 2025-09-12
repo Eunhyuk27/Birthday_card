@@ -29,6 +29,8 @@
         font-family: "Poppins", sans-serif;
         color: var(--dark-color);
         position: relative;
+        padding: 1rem;
+        line-height: 1.6;
       }
 
       canvas#fireworks {
@@ -56,7 +58,7 @@
 
       .header h1 {
         font-family: "Pacifico", cursive;
-        font-size: 3rem;
+        font-size: clamp(1.8rem, 5vw, 3rem);
         color: var(--primary-color);
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -71,12 +73,14 @@
       .birthday-card {
         background: white;
         border-radius: 20px;
-        padding: 2rem;
+        padding: 1.2rem;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
         margin-bottom: 2rem;
+        max-width: 95%;
+        margin: auto;
       }
 
       .birthday-card:hover {
@@ -181,7 +185,7 @@
           font-size: 1.8rem;
         }
         .birthday-card {
-          padding: 1rem;
+          padding: 1,5rem;
         }
         .matcha-img {
           width: 80px;
@@ -190,6 +194,9 @@
         .cake-img {
           width: 200px;
         }
+        .p {
+          font-size: 1rem;
+       }
       }
 
       /* Tombol musik */
@@ -450,3 +457,4 @@
     </script>
   </body>
 </html>
+
